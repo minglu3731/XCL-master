@@ -16,9 +16,6 @@ import bishe.xcl.com.xcl.activity.FirstThirdActivity;
 /**
  * Project : XCL
  * Package : bishe.xcl.com.xcl.fragment
- * Todo
- * Created by Zhang Mingzhe on 2016/5/19.
- * Mail : zhangmingzhe@navinfo.com.
  * Update by on .
  * Mail : .
  */

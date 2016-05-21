@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="bishe.xcl.com.xcl"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="bishe.xcl.com.xcl">
 
     <application
         android:allowBackup="true"
@@ -8,26 +8,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.FirstFirstActivity">
-        </activity>
-        <activity android:name=".activity.FirstSecondActivity">
-        </activity>
-        <activity android:name=".activity.FirstThirdActivity">
-        </activity>
-        <activity android:name=".activity.SecondFirstActivity">
-        </activity>
-        <activity android:name=".activity.SecondSecondActivity">
-        </activity>
-        <activity android:name=".activity.SecondThirdActivity">
-        </activity>
+        <activity android:name=".activity.FirstFirstActivity"></activity>
+        <activity android:name=".activity.FirstSecondActivity"></activity>
+        <activity android:name=".activity.FirstThirdActivity"></activity>
+        <activity android:name=".activity.SecondFirstActivity"></activity>
+        <activity android:name=".activity.SecondSecondActivity"></activity>
+        <activity android:name=".activity.SecondThirdActivity"></activity>
+        <activity android:name=".activity.InfomationActivity"></activity>
     </application>
 
 </manifest>

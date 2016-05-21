@@ -18,13 +18,17 @@ public class FirstSecondAdapter extends BaseAdapter{
 
     private List<Infomation> datas;
 
+    public FirstSecondAdapter(Context context) {
+        this.context = context;
+    }
+
     @Override
     public int getCount() {
         return datas == null ? 0 : datas.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Infomation getItem(int position) {
         return datas.get(position);
     }
 
@@ -36,7 +40,7 @@ public class FirstSecondAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Infomation infomation = datas.get(position);
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.lv_fs_item, parent, false);
@@ -51,6 +55,10 @@ public class FirstSecondAdapter extends BaseAdapter{
         viewHolder.tvTitle.setText(infomation.getTitle());
         viewHolder.img.setBackgroundResource(infomation.getImgId());
         return convertView;
+    }
+
+    public void setDatas(List<Infomation> datas) {
+        this.datas = datas;
     }
 
     private class ViewHolder{
