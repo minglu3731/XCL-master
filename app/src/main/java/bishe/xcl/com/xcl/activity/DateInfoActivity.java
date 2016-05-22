@@ -58,7 +58,7 @@ public class DateInfoActivity extends AppCompatActivity {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Plan plan : plans){
-            stringBuilder.append("健身目标 ： ").append(plan.getContent()).append("  提醒时间 ： ").append(plan.getAlertTime()).append("\n");
+            stringBuilder.append("健身目标 ： ").append(plan.getContent()).append("  提醒时间 ： ").append("\n");
         }
 
         TextView tv = (TextView) findViewById(R.id.tv_date_info);
@@ -70,9 +70,7 @@ public class DateInfoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             Bundle bundle = data.getExtras();
-            if (bundle == null){
-                return;
-            }
+            if (bundle == null) return;
             Bitmap bitmap = (Bitmap) bundle.get("data");
             FileHelper.save(bitmap, AddDateActivity.ft.format(date));
             new DatePhotoDao(this).add(new DatePhoto(AddDateActivity.ft.format(date)));

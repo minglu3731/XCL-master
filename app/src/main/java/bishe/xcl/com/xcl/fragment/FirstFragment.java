@@ -12,6 +12,7 @@ import bishe.xcl.com.xcl.R;
 import bishe.xcl.com.xcl.activity.FirstFirstActivity;
 import bishe.xcl.com.xcl.activity.FirstSecondActivity;
 import bishe.xcl.com.xcl.activity.FirstThirdActivity;
+import bishe.xcl.com.xcl.step.StartActivity;
 
 /**
  * Project : XCL
@@ -37,7 +38,7 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.main_first_first_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FirstFragment.this.getContext(), FirstFirstActivity.class));
+                startActivity(new Intent(FirstFragment.this.getContext(), StartActivity.class));
             }
         });
 

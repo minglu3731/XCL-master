@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style parent="android:Widget.TextView" name="small_text_style">
+
+        <item name="android:textColor">@android:color/white</item>
+
+        <item name="android:textSize">20sp</item>
+
+        <item name="android:paddingRight">2dip</item>
+
+    </style>
+
 </resources>

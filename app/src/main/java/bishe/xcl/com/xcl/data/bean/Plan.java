@@ -12,16 +12,13 @@ public class Plan {
     private String date;
     @DatabaseField(columnName = "content")
     private String content;
-    @DatabaseField(columnName = "alert_time")
-    private String alerttime;
 
     public Plan() {
     }
 
-    public Plan(String date, String content, String time) {
+    public Plan(String date, String content) {
         this.date = date;
         this.content = content;
-        this.alerttime = time;
     }
 
     public String getDate() {
@@ -38,14 +35,6 @@ public class Plan {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getAlertTime() {
-        return alerttime;
-    }
-
-    public void setAlertTime(String time) {
-        this.alerttime = time;
     }
 
     public int getId() {

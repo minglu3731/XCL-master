@@ -26,7 +26,8 @@ import bishe.xcl.com.xcl.data.dao.PlanDao;
 public class AddDateActivity extends AppCompatActivity implements View.OnClickListener, CalendarDatePickerDialogFragment.OnDateSetListener, RadialTimePickerDialogFragment.OnTimeSetListener {
 
     private Button btnCancle, btnSure;
-    private LinearLayout layoutBegin, layoutEnd, layoutTime;
+    private LinearLayout layoutBegin;
+    private LinearLayout layoutEnd;
     private TextView tvBegin, tvEnd, tvTime;
     private EditText etContent;
 
@@ -43,7 +44,6 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
     private void initView() {
         layoutBegin = (LinearLayout) findViewById(R.id.layout_date_add_begin);
         layoutEnd = (LinearLayout) findViewById(R.id.layout_date_add_end);
-        layoutTime = (LinearLayout) findViewById(R.id.layout_date_add_time);
         btnCancle = (Button) findViewById(R.id.btn_date_add_cancle);
         btnSure = (Button) findViewById(R.id.btn_date_add_sure);
         etContent = (EditText) findViewById(R.id.et_date_add);
@@ -55,7 +55,6 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
         layoutEnd.setOnClickListener(this);
         btnCancle.setOnClickListener(this);
         btnSure.setOnClickListener(this);
-        layoutTime.setOnClickListener(this);
     }
 
     @Override
@@ -90,13 +89,6 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        } else if (v == layoutTime){
-            RadialTimePickerDialogFragment rtpd = new RadialTimePickerDialogFragment()
-                    .setOnTimeSetListener(this)
-                    .setStartTime(5, 0)
-                    .setDoneText("选择")
-                    .setCancelText("取消");
-            rtpd.show(getSupportFragmentManager(), null);
         }
     }
 
@@ -110,7 +102,7 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
         List<Date> dates = getDates(begin, end);
 
         for (Date date : dates){
-            Plan plan = new Plan(ft.format(date), etContent.getText().toString(), tvTime.getText().toString());
+            Plan plan = new Plan(ft.format(date), etContent.getText().toString());
             new PlanDao(this).add(plan);
         }
 
