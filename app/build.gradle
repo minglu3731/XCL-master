@@ -20,10 +20,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0-beta1'
     compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
     compile 'com.squareup:android-times-square:1.6.5@aar'
     compile 'com.code-troopers.betterpickers:library:2.5.5'
+    compile files('src/main/java/libs/ormlite-android-4.49-SNAPSHOT.jar')
+    compile files('src/main/java/libs/ormlite-core-4.49-SNAPSHOT.jar')
 }

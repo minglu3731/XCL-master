@@ -17,6 +17,7 @@ import java.util.Date;
 
 import bishe.xcl.com.xcl.R;
 import bishe.xcl.com.xcl.activity.AddDateActivity;
+import bishe.xcl.com.xcl.activity.DateInfoActivity;
 
 /**
  * Project : XCL
@@ -50,6 +51,9 @@ public class SecondFragment extends Fragment {
         calendar.setDateSelectableFilter(new CalendarPickerView.DateSelectableFilter() {
             @Override
             public boolean isDateSelectable(Date date) {
+                Intent intent = new Intent(getContext(), DateInfoActivity.class);
+                intent.putExtra("date", date);
+                startActivity(intent);
                 return true;
             }
         });

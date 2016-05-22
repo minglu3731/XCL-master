@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import bishe.xcl.com.xcl.R;
+import bishe.xcl.com.xcl.TimeService;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -13,6 +14,9 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        Intent service=new Intent(this, TimeService.class);
+        startService(service);
     }
 
     @Override

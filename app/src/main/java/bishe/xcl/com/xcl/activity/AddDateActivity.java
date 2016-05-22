@@ -2,6 +2,7 @@ package bishe.xcl.com.xcl.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,12 +12,16 @@ import android.widget.TextView;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import bishe.xcl.com.xcl.R;
 import bishe.xcl.com.xcl.data.bean.Plan;
+import bishe.xcl.com.xcl.data.dao.PlanDao;
 
 public class AddDateActivity extends AppCompatActivity implements View.OnClickListener, CalendarDatePickerDialogFragment.OnDateSetListener, RadialTimePickerDialogFragment.OnTimeSetListener {
 
@@ -25,7 +30,7 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tvBegin, tvEnd, tvTime;
     private EditText etContent;
 
-    private SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+    public final static SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +85,11 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
                     .setCancelText("取消");
             cdp.show(getSupportFragmentManager(), null);
         } else if (v == btnSure){
-            savePlan();
+            try {
+                savePlan();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         } else if (v == layoutTime){
             RadialTimePickerDialogFragment rtpd = new RadialTimePickerDialogFragment()
                     .setOnTimeSetListener(this)
@@ -91,8 +100,21 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void savePlan() {
-        Plan plan = new Plan(tvBegin.getText().toString(), tvEnd.getText().toString(),etContent.getText().toString(),  tvTime.getText().toString());
+    private void savePlan() throws ParseException {
+        Date beginDate = ft.parse(tvBegin.getText().toString());
+        Calendar begin = Calendar.getInstance();
+        begin.setTime(beginDate);
+        Date endDate = ft.parse(tvEnd.getText().toString());
+        Calendar end = Calendar.getInstance();
+        end.setTime(endDate);
+        List<Date> dates = getDates(begin, end);
+
+        for (Date date : dates){
+            Plan plan = new Plan(ft.format(date), etContent.getText().toString(), tvTime.getText().toString());
+            new PlanDao(this).add(plan);
+        }
+
+        finish();
     }
 
     @Override
@@ -107,5 +129,18 @@ public class AddDateActivity extends AppCompatActivity implements View.OnClickLi
     public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
         String time = "" + hourOfDay + " : " + minute;
         tvTime.setText(time);
+    }
+
+    private List<Date> getDates(Calendar p_start, Calendar p_end) {
+        List<Date> result = new ArrayList<>();
+        result.add(p_start.getTime());
+        Calendar temp = p_start.getInstance();
+        temp.add(Calendar.DAY_OF_YEAR, 1);
+        while (temp.before(p_end)) {
+            result.add(temp.getTime());
+            temp.add(Calendar.DAY_OF_YEAR, 1);
+        }
+        result.add(p_end.getTime());
+        return result;
     }
 }
